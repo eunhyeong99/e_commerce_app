@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theme/constant/app_icons.dart';
+import '../../../../core/theme/custom/custom_font_weight.dart';
 import '../../../../core/theme/custom/custom_theme.dart';
 import '../../cubit/mall_type_cubit.dart';
+import 'widgets/svg_icon_button.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -15,37 +17,48 @@ class HomeAppBar extends StatelessWidget {
       builder: (_, state) {
         return AnimatedContainer(
           padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-          color: (state.isMarket)
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.background,
+          color: state.theme.backgroundColor,
           child: AppBar(
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                AppIcons.mainLogo,
-                colorFilter: ColorFilter.mode(
-                  state.isMarket
-                      ? Theme.of(context).colorScheme.onPrimary
-                      : Theme.of(context).colorScheme.primary,
-                  BlendMode.srcIn,
-                ),
-              ),
+            leading: SvgIconButton(
+              icon: AppIcons.mainLogo,
+              color: state.theme.logoColor,
+              padding: 8.0,
             ),
-            title: DefaultTabController(
-              length: MallType.values.length,
-              initialIndex: state.index,
-              child: TabBar(
-                tabs: List.generate(
-                  MallType.values.length,
-                  (index) => Tab(
-                    text: MallType.values[index].toName,
+            title: AnimatedContainer(
+              decoration: BoxDecoration(
+                color: state.theme.containerColor,
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+              ),
+              child: SizedBox(
+                height: 28,
+                child: DefaultTabController(
+                  length: MallType.values.length,
+                  initialIndex: state.index,
+                  child: TabBar(
+                    tabs: List.generate(
+                      MallType.values.length,
+                      (index) => Tab(text: MallType.values[index].toName),
+                    ),
+                    isScrollable: true,
+                    indicator: BoxDecoration(
+                      color: state.theme.indicatorColor,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    dividerColor: Colors.transparent,
+                    labelColor: state.theme.labelColor,
+                    labelStyle: Theme.of(context).textTheme.labelLarge.bold,
+                    labelPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    unselectedLabelColor: state.theme.unselectedLabelColor,
+                    unselectedLabelStyle:
+                        Theme.of(context).textTheme.labelLarge,
+                    onTap: (index) =>
+                        context.read<MallTypeCubit>().changeIndex(index),
+                    splashBorderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
                 ),
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.black,
-                onTap: (index) =>
-                    context.read<MallTypeCubit>().changeIndex(index),
               ),
+              duration: Duration(microseconds: 400),
             ),
             actions: [
               _Actions(icon: AppIcons.location, state: state),
@@ -81,9 +94,7 @@ class _Actions extends StatelessWidget {
       child: SvgPicture.asset(
         icon,
         colorFilter: ColorFilter.mode(
-          state.isMarket
-              ? Theme.of(context).colorScheme.background
-              : Theme.of(context).colorScheme.contentPrimary,
+          state.theme.iconColor,
           BlendMode.srcIn,
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/theme/custom/custom_app_bar.dart';
+
 enum MallType { market, beauty }
 
 class MallTypeCubit extends Cubit<MallType> {
@@ -12,9 +14,18 @@ extension MallTypeX on MallType {
   String get toName {
     switch (this) {
       case MallType.market:
-        return "마켓";
+        return "Market";
       case MallType.beauty:
-        return "뷰티";
+        return "Beauty";
+    }
+  }
+
+  CustomAppBarTheme get theme{
+    switch(this){
+      case MallType.market:
+        return CustomAppBarTheme.market;
+      case MallType.beauty:
+        return CustomAppBarTheme.beauty;
     }
   }
 
