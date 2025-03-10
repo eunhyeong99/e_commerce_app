@@ -1,0 +1,2 @@
+C:/Users/whdms/Documents/libraries/e_commerce_app/android/app/.cxx/Debug/1t2h4h4q/x86/CMakeFiles/edit_cache.dir
+C:/Users/whdms/Documents/libraries/e_commerce_app/android/app/.cxx/Debug/1t2h4h4q/x86/CMakeFiles/rebuild_cache.dir
