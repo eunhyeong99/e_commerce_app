@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/theme/theme_data.dart';
 import 'package:e_commerce_app/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
+      theme: CustomThemeData.themeData,
     );
   }
 }
