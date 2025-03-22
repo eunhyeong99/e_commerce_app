@@ -1,5 +1,5 @@
-// import 'package:logger/logger.dart';
-//
-// class CustomLogger {
-//   static final Logger logger = Logger();
-// }
+import 'package:logger/logger.dart';
+
+class CustomLogger {
+  static final Logger logger = Logger();
+}

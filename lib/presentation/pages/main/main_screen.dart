@@ -1,8 +1,8 @@
-import 'package:e_commerce_app/core/theme/constant/app_icons.dart';
 import 'package:e_commerce_app/presentation/pages/category/category_page.dart';
 import 'package:e_commerce_app/presentation/pages/home/components/home_page.dart';
 import 'package:e_commerce_app/presentation/pages/main/components/top_app_bar/top_app_bar.dart';
 import 'package:e_commerce_app/presentation/pages/main/cubit/bottom_nav_cubit.dart';
+import 'package:e_commerce_app/presentation/pages/main/cubit/mall_type_cubit.dart';
 import 'package:e_commerce_app/presentation/pages/serach/search_page.dart';
 import 'package:e_commerce_app/presentation/pages/user/user_page.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,11 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => BottomNavCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => BottomNavCubit()),
+        BlocProvider(create: (_) => MallTypeCubit()),
+      ],
       child: const MainScreenView(),
     );
   }

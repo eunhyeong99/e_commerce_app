@@ -13,7 +13,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
       builder: (_, state) {
         switch (state) {
           case BottomNav.home:
-            return const HomeAppBar();
+            return HomeAppBar();
           case BottomNav.category:
           case BottomNav.search:
           case BottomNav.user:
